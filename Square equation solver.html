@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Square equation solver - small JS script</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    body {
+        width: 80%;
+        height: 100vh;
+        margin: 0 auto;
+        font-size: 16pt;
+        line-height: 18pt;
+        background: url('formulas.png') no-repeat right center;
+        
+    }
+
+    h1 {
+        color: pink;
+        text-shadow: 3px 3px 3px grey;
+        letter-spacing: 5px;
+        font-size: 36pt;
+        margin-bottom: 50px;
+    }
+
+    input {
+        margin: 0 0 20px 20px;
+        height: 20px;
+    }
+
+    input[type=number]:hover {
+        box-shadow: 3px 3px 5px pink;
+    }
+
+    input[type=button] {
+        height: 35px;
+    }
+
+    #show-equation {
+        width: 300px;
+        background-color: rgb(253, 207, 215);
+        font-size: 20pt;
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+
+    #show-result {
+        width: 300px;
+        background-color: rgb(182, 181, 181);
+        font-size: 20pt;
+        padding: 20px;
+    }
+    </style>
+</head>
+<body>
+
+    <h1>Square equation solver</h1>
+
+    <p>Please input your equation here as it <b>ax<sup>2</sup> &#177 bx &#177 c=0</b></p>
+
+    <form id="equation">
+        <label for="first_number">Insert an "a" parameter</label>
+        <input type="number" id="first_number" oninput="showEquation();"/>
+        <br>
+        <label for="second_number">Insert an "b" parameter</label>
+        <input type="number" id="second_number" oninput="showEquation();"/>
+        <br>
+        <label for="third_number">Insert an "c" parameter</label>
+        <input type="number" id="third_number" oninput="showEquation();"/>
+        <br>
+        <input type="button" value="Press to get the result" id="result_btn" onclick="squareEquation();">
+    </form>
+    <div id="show-equation" ></div>
+
+    <div id="show-result" ></div>
+
+<script>
+//show the equation
+function showEquation () {
+  var getFristElement = document.getElementById('first_number').value;
+  var getSecondElemet = document.getElementById('second_number').value;
+  var getThirdElemet = 
+document.getElementById('third_number').value;
+ var display = document.getElementById('show-equation');
+ if (getSecondElemet > 0 && getThirdElemet > 0) {
+   display.innerHTML = getFristElement + 'x\u00B2' + ' + ' + getSecondElemet + 'x' + '  +  ' + getThirdElemet + ' = 0';  
+     }
+  else if (getSecondElemet < 0 && getThirdElemet < 0){
+  display.innerHTML = getFristElement + 'x^2' + getSecondElemet + 'x' + getThirdElemet + ' = 0';}
+  else if (getSecondElemet < 0 ) {
+    display.innerHTML = getFristElement + 'x^2' +  getSecondElemet + 'x' + ' + ' + getThirdElemet + ' = 0';
+  }
+  else if (getThirdElemet < 0 ) {
+    display.innerHTML = getFristElement + 'x^2' + ' + ' + getSecondElemet + 'x' +  getThirdElemet + ' = 0';
+  }
+};
+// solved
+//a * Math.pow(x, 2) + b * x + c = 0;
+function squareEquation(a, b, c){
+  a = document.getElementById('first_number').value;
+  b = document.getElementById('second_number').value;
+    c = document.getElementById('third_number').value;
+var d = Math.pow(b, 2) - 4 * a * c;
+var displayOne = document.getElementById('show-result');
+if (d > 0) {
+    var x1 = ((-b) + Math.sqrt(d))/ 2 * a;
+      var x2 = ((-b) - Math.sqrt(d))/ 2 * a;
+  console.log('x1 = ' + x1);
+  console.log('x2 = ' + x2);
+
+  displayOne.innerHTML = 'x1 = ' + Math.round(x1) + ' and ' + 'x2 = ' + Math.round(x2);
+    }
+else if (d === 0) {
+ var x = (-b) / 2 * a;
+  console.log('x = ' + x);
+  displayOne.innerHTML = 'x = ' + x;
+}
+else if (d < 0) {
+  console.log('Not a correct equation');
+  displayOne.innerHTML = 'Not a correct equation';
+}
+};
+</script>
+</body>
+</html>
+
